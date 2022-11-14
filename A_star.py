@@ -57,7 +57,7 @@ time.sleep(4)
 circle_list=[[0,-1],[0,1],[-1,0],[1,0]]
 #open_set是一个优先队列，用来存放待处理的节点,数据为x,y,优先级
 #初始化open_set和close_set
-open_set = [[point['start_x'],point['start_y'],14]]
+open_set = [[point['start_x'],point['start_y'],0]]
 close_set = []
 parent={str(point['start_x'])+','+str(point['start_y']):[point['start_x'],point['start_y']]}
 #如果open_set不为空
@@ -77,8 +77,8 @@ while(open_set):
             if map[m[0]][m[1]]=='#':
                 continue
                 #计算节点m的优先级
-            # g = abs(math.pow(m[0]-point['start_y'],2)+math.pow(m[1]-point['start_x'],2))
-            h = abs(math.pow(m[0]-point['end_y'],2)+math.pow(m[1]-point['end_x'],2))
+            g = abs(m[0]-point['start_y'])+abs(m[1]-point['start_x'])
+            h = abs(m[0]-point['end_y'])+abs(m[1]-point['end_x'])
             f = h
             m.append(f)  # type: ignore
             for close in close_set:

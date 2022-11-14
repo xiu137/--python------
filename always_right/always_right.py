@@ -37,7 +37,7 @@ while list:
     map[x][y]=2
     if([x,y]==[end["end_x"],end["end_y"]]):
         break
-    for i in [(x+1,y),(x,y+1),(x-1,y),(x,y-1)]:#右手扶墙
+    for i in [(x+1,y),(x,y+1),(x-1,y),(x,y-1)]:
         if map[i[0]][i[1]]==0:
             list.append(i)
             fill(i[0],i[1],'blue')

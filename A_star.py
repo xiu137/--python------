@@ -1,18 +1,14 @@
 import time
 import tkinter as tk
-from tkinter import *
 import math
 #map是个二维数组，用来存储地图信息
 #map[j][i]表示地图中第j行第i列的元素
-#'#'表示墙壁
-#'S'表示起点
-#'E'表示终点
-#'*'表示通路
-def fix(x,y):
+#'#'表示墙壁 'S'表示起点 'E'表示终点 '*'表示通路
+def blue(x,y):
     canvas.create_rectangle(x*20, y*20, x*20+20, y*20+20, fill='blue')
     window.update()
     time.sleep(0.05)
-def answer(x,y):
+def pink(x,y):
     canvas.create_rectangle(x*20, y*20, x*20+20, y*20+20, fill='pink')
     window.update()
     time.sleep(0.05)
@@ -37,6 +33,7 @@ map = [
         ['#','*','#','*','#','#','*','#','#','#','#','*','*','*','#','*','*','E','#','#'],
         ['#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'],
         ]
+#注意，开始和结束坐标需要额外输入一次，所有函数调用都使用point字典中的坐标
 point={'start_x':1,'start_y':1,'end_x':17,'end_y':11}
 #创建一个窗口
 window=tk.Tk()
@@ -69,7 +66,7 @@ while(open_set):
     if(n[0]==point['end_y'] and n[1]==point['end_x']):
         road=[n[0],n[1]]
         while(road[0]!=point['start_y'] or road[1]!=point['start_x']):
-            answer(road[1],road[0])
+            pink(road[1],road[0])
             road=parent[str(road[0])+','+str(road[1])]
         start()
         end()
@@ -83,7 +80,7 @@ while(open_set):
             # g = abs(math.pow(m[0]-point['start_y'],2)+math.pow(m[1]-point['start_x'],2))
             h = abs(math.pow(m[0]-point['end_y'],2)+math.pow(m[1]-point['end_x'],2))
             f = h
-            m.append(f)
+            m.append(f)  # type: ignore
             for close in close_set:
                 if m==close:
                     break
@@ -92,7 +89,7 @@ while(open_set):
                     key=str(m[0])+','+str(m[1])
                     parent[key]=n
                     open_set.append(m)#节点m加入open_set中
-                    fix(m[1],m[0])
+                    blue(m[1],m[0])
         close_set.append(n)
         del open_set[0]
     open_set.sort(key=lambda x:x[2])#根据优先级排序

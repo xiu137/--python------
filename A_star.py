@@ -79,7 +79,7 @@ while(open_set):
                 #计算节点m的优先级
             g = abs(m[0]-point['start_y'])+abs(m[1]-point['start_x'])
             h = abs(m[0]-point['end_y'])+abs(m[1]-point['end_x'])
-            f = h
+            f = g + h
             m.append(f)  # type: ignore
             for close in close_set:
                 if m==close:

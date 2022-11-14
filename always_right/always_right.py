@@ -45,6 +45,8 @@ while list:
     else:
         fill(x,y,'yellow')
         list.pop()
+else :
+    print('no way')
 print("end")
 fill (end["end_x"],end["end_y"],'green')
 frame.mainloop()
